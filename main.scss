@@ -1,0 +1,249 @@
+$main-color: rgba(240, 88, 37, 1);
+$gray-1: #F7F7F7;
+$gray-2: #F0F0F0;
+$gray-3: #a3b4b9;
+
+* {
+    margin: 0;
+    padding: 0
+}
+body, html { font-family: 'Roboto', sans-serif }
+
+// Header
+header {
+    position: relative;
+    z-index: 10;
+    background-color: $main-color;
+    padding: 15px 22px 15px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+
+    .logo {
+        width: 160px;
+    }
+    .btn-menu {
+        color: #FFFFFF;
+        font-size: 40px
+    }
+}
+
+// Title
+.title-container {
+    padding: 100px 15px 25px 15px;
+
+    background: {
+        image: url('assets/header.svg');
+        background-repeat: repeat;
+        size: 78px;
+        position: center
+    }
+    .title {
+        font-size: 28px;
+        color: $main-color;
+        font-weight: 300;
+        text-align: center
+    }
+}
+
+// Calculator
+.calculator-container {
+    position: relative;
+
+    // Top
+    .top {
+        background-color: $gray-1;
+        padding: 45px 25px 130px 25px;
+        
+        .explaniation {
+            text-align: center;
+            font-size: 17px;
+            line-height: 25px;
+            font-weight: 300;
+            margin-bottom: 45px;
+            animation: title-left-to-right 1s
+        }
+
+        // Items
+        .items-container {
+            .item {
+                border-radius: 5px;
+                box-shadow: 0 3px 3px rgba(0,0,0, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                background-color: #FFFFFF;
+                // 
+                max-width: 0px;
+                padding: 0px;
+                animation: item 4s forwards;
+                animation-delay: 1.2s;
+                
+                
+                .name {
+                    width: 40%;
+                    opacity: 0;    
+                    animation: show-items 1s forwards;
+                    animation-delay: 3.5s;
+                }
+
+                .image {
+                    max-width: 0px;
+                    animation: item-image 4s forwards, item-image-translate 1.5s forwards;
+                    animation-delay: 0.8s, 3s
+                }
+            
+                .controls {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    opacity: 0; 
+                    animation: show-items 1s forwards;
+                    animation-delay: 4s;
+                    min-width: 70px;
+
+                    .add-button {
+                        width: 26px;
+                        height: 26px;
+                        background-color: #afaeae;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #FFFFFF;
+                        transition: visibility 0.3s, opacity 0.3s;
+                    }
+                    
+                    img { width: 20px }
+                    img, .quantity {
+                        position: absolute;
+                        opacity: 0;
+                        z-index: -5;
+                        transition: opacity 0.3s;
+                    }
+                    .quantity {
+                        color: $main-color;
+                        margin: 0px 10px 0px 10px
+                    }
+                }
+
+                .toggle-controls-button {
+                    .add-button { 
+                        position: absolute;
+                        z-index: -5;
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+                .toggle-controls {
+                    img, .quantity {
+                        position: relative;
+                        opacity: 1;
+                        z-index: 1;
+                    }
+                }
+            }
+
+            #show_more { 
+                img {
+                    width: 22px;
+                    opacity: 0;
+                    animation: show-items 1s forwards;
+                    animation-delay: 4s;
+                }
+            }
+        }
+    }
+
+    // Botton
+    .bottom-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        display: flex;
+        align-items: flex-end;
+        pointer-events: none;
+        opacity: 0;
+        animation: title-bottom-to-top 1s forwards;
+        animation-delay: 1s;
+
+        .bottom {
+            background-color: $gray-2;
+            text-align: center;
+            padding: 35px 0px 35px 0px;
+            position: sticky;
+            width: 100%;
+            bottom: 0;
+    
+            .btn-next {
+                font-size: 18px;
+                color: #FFFFFF;
+                border-radius: 4px;
+                width: 80%;
+                max-width: 300px;
+                background-color: $main-color;
+                padding: 10px 15px 10px 15px;
+                border: 0px
+            }
+        }
+    }
+}
+
+footer {
+    height: 300px;
+    background-color: #253a47
+}
+
+// Animations
+@keyframes item {
+    0%{ 
+        border: 1px solid $gray-3; 
+        max-height: 30px
+    }
+    60% {  
+        padding: 16px 18px 16px 18px;
+        max-width: 100%;
+    }
+    100% {  
+        padding: 16px 18px 16px 18px;
+        max-width: 100%;
+        border: 1px solid $gray-3;
+        max-height: 30px;
+    }
+}
+
+@keyframes item-image {
+    from { max-width: 0px; position: absolute }
+    to { max-width: 100%; position: absolute }
+}
+
+@keyframes item-image-translate {
+    from {
+        margin-left: 0px;
+        position: relative;
+        transform: translateX(-38vw)
+    }
+    to { transform: translateX(0px); position: relative }
+}
+
+@keyframes show-items {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+@keyframes title-left-to-right {
+    from { transform: translateX(90px); opacity: 0 }
+    to { transform: translateX(0px); opacity: 1 }
+}
+
+@keyframes title-bottom-to-top {
+    from { transform: translateY(40px); opacity: 0 }
+    to { transform: translateY(0px);  opacity: 1 }
+}
